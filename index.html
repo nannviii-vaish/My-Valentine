@@ -2,24 +2,202 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Be My Valentine</title>
-<link rel="stylesheet" href="style.css">
+<title>Be My Valentine 💖</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;
+}
+
+/* background */
+.bg{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#ffc3e8);
+  background-size:500% 500%;
+  animation:bg 12s ease infinite;
+  z-index:-1;
+}
+@keyframes bg{
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
+}
+
+/* card */
+.card{
+  background:rgba(255,255,255,.28);
+  backdrop-filter:blur(25px);
+  padding:45px;
+  border-radius:35px;
+  text-align:center;
+  box-shadow:0 40px 80px rgba(0,0,0,.35);
+  color:white;
+  animation:pop 1s cubic-bezier(.2,1.4,.4,1);
+  transition:.6s ease;
+}
+@keyframes pop{
+  from{transform:scale(.4);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+/* text */
+h2{
+  overflow:hidden;
+  white-space:nowrap;
+  animation:type 2.5s steps(40,end);
+}
+@keyframes type{
+  from{width:0}
+  to{width:100%}
+}
+
+/* buttons */
+button{
+  padding:15px 36px;
+  border:none;
+  border-radius:50px;
+  font-size:18px;
+  margin:18px;
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+#yes{
+  background:#ff2d55;
+  color:white;
+  animation:pulse 1.4s infinite;
+  box-shadow:0 0 25px #ff2d55;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+
+#no{
+  background:#eee;
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+  transition:
+    left .7s ease,
+    top .7s ease,
+    opacity .3s;
+}
+
+/* hide screens */
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(.7);
+  position:absolute;
+}
+
+/* floating hearts */
+#hearts span{
+  position:absolute;
+  animation:float 6s linear;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:1}
+  100%{transform:translateY(-20vh);opacity:0}
+}
+</style>
 </head>
 
 <body>
 
-<div class="card">
-    <img src="https://i.imgur.com/6XH4EJZ.png" class="avatar">
+<!-- AUDIO -->
+<audio id="music1" loop>
+  <source src="love_first_part.mp3">
+</audio>
 
-    <h2 id="text"></h2>
+<audio id="music2" loop>
+  <source src="love_second_part.mp3">
+</audio>
 
-    <button id="yes">Yes</button>
-    <button id="no">No</button>
+<div class="bg"></div>
 
-    <p>No seems shy 😈</p>
+<!-- FIRST SCREEN -->
+<div class="card" id="ask">
+  <img src="cutie.png" width="120"><br><br>
+  <h2>Koraga… will you be my Valentine? 💕</h2>
+  <button id="yes">YES 💖</button>
+  <button id="no">NO 😈</button>
 </div>
 
-<script src="script.js"></script>
+<!-- YES SCREEN -->
+<div class="card hidden" id="yay" hidden>
+  <h1>Yesss 💖</h1>
+  <img src="https://media0.giphy.com/media/KmxmoHUGPDjfQXqGgv/giphy.gif" width="280">
+  <p>KRL is happy 🥹✨</p>
+</div>
+
+<div id="hearts"></div>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const ask = document.getElementById("ask");
+const yay = document.getElementById("yay");
+
+const music1 = document.getElementById("music1");
+const music2 = document.getElementById("music2");
+
+let musicStarted = false;
+let noActive = true;
+
+/* start first music */
+document.addEventListener("click", e=>{
+  if(!musicStarted && e.target.id!=="yes"){
+    music1.volume = .6;
+    music1.play().catch(()=>{});
+    musicStarted = true;
+  }
+});
+
+/* SHOW NO once per hover */
+ask.addEventListener("mouseenter", ()=>{
+  if(!noActive) return;
+
+  no.style.opacity = 1;
+  no.style.pointerEvents = "auto";
+
+  const pad = 120;
+  no.style.left = Math.random()*(window.innerWidth-pad) + "px";
+  no.style.top  = Math.random()*(window.innerHeight-pad) + "px";
+});
+
+/* YES click */
+yes.addEventListener("click", ()=>{
+  noActive = false;
+
+  music1.pause();
+  music2.volume = .75;
+  music2.play().catch(()=>{});
+
+  ask.classList.add("hidden");
+  yay.hidden = false;
+  yay.classList.remove("hidden");
+});
+
+/* hearts */
+setInterval(()=>{
+  const h=document.createElement("span");
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"%";
+  document.getElementById("hearts").appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+</script>
 
 </body>
 </html>
