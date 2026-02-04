@@ -1,12 +1,17 @@
-const params = new URLSearchParams(window.location.search);
-const to = params.get("to") || "You";
-
-document.getElementById("text").innerText =
-`${to}, will you be my valentine?`;
-
+const text = document.getElementById("text");
+const yes = document.getElementById("yes");
 const no = document.getElementById("no");
 
+text.innerHTML = "Koraga, will you be my Valentine?";
+
+// No button runs away
 no.addEventListener("mouseover", () => {
-no.style.left = Math.random()*80 + "%";
-no.style.top = Math.random()*80 + "%";
+    no.style.position = "absolute";
+    no.style.left = Math.random() * 80 + "%";
+    no.style.top = Math.random() * 80 + "%";
+});
+
+// Yes redirects
+yes.addEventListener("click", () => {
+    window.location.href = "yes.html";
 });
