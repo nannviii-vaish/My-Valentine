@@ -1,0 +1,38 @@
+body {
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(#ffb6c1,#ffc0cb);
+font-family:Arial;
+}
+
+.card {
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+width:300px;
+}
+
+.avatar {
+width:80px;
+}
+
+button {
+padding:10px 25px;
+border-radius:20px;
+border:none;
+cursor:pointer;
+}
+
+#yes {
+background:#ff2f92;
+color:white;
+}
+
+#no {
+background:#eee;
+position:absolute;
+}
