@@ -1,38 +1,14 @@
-body {
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(#ffb6c1,#ffc0cb);
-font-family:Arial;
-}
+<!DOCTYPE html>
+<html>
+<head>
+<title>He Said YES 💖</title>
+</head>
 
-.card {
-background:white;
-padding:40px;
-border-radius:20px;
-text-align:center;
-width:300px;
-}
+<body style="text-align:center; background:#ffe6f2;">
 
-.avatar {
-width:80px;
-}
+<h1>KRL will be so happy 😍</h1>
 
-button {
-padding:10px 25px;
-border-radius:20px;
-border:none;
-cursor:pointer;
-}
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="300">
 
-#yes {
-background:#ff2f92;
-color:white;
-}
-
-#no {
-background:#eee;
-position:absolute;
-}
+</body>
+</html>
